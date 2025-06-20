@@ -1,0 +1,78 @@
+{% load static %}
+{% load markdown_extras %}
+{% load current_time %}
+{% load user_info %}
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Forum Posts</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4Q6Gf2aSP4eDXB8Miphtr37CMZZQ5oXLH2yaXMJ2w8e2ZtHTl7GptT4jmndRuHDT" crossorigin="anonymous">
+    {% block styles %}
+        <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    {% endblock %}
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
+</head>
+<body>
+    {% comment %}
+    <h1>This is our dashboard</h1>
+    <h2>Hello {{ personal_info.first_name|capfirst }} {{ personal_info.last_name|lower|capfirst }} {{ personal_info.alias|truncatechars:6 }}</h2>
+    <h2>The current time is : {{ current_time|date }}</h2>
+    <h2>Is hungry: {{ is_hungry|yesno }}</h2>
+    
+    {% if is_hungry %}
+        <h2>He is munchin' like a motherf******</h2>
+    {% elif is_hungry is None %}
+        <h2>Two more puffs and we are good to go</h2>
+    {% else %}
+        <h2>Smoke more weed {{ personal_info.first_name|capfirst }}</h2>
+    {% endif %}
+    
+    {% if personal_info.first_name|length >= 4 %}
+        <h2>Judging by your name you got D*** like a firehose. </h2>
+    {% endif %}
+    
+    {% for el in favourite_songs %}
+        <h2>Your favourite song for ever ever ever: {{ el }}</h2>
+    {% empty %}
+        <h2>No songs</h2>
+    {% endfor %}
+    <h2>Your favourite songs are: {{ favourite_songs|join:", " }}</h2>
+    {% endcomment %}
+    
+    {% include 'common/nav.html' %}
+    
+  <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-2 p-3">
+                <p>Last refresh: {% current_time %}</p>
+            </div>
+            <div class="col-md-8 py-4">
+                 <div>
+                    {% block content %}
+                    {% endblock %}
+                </div>
+            </div>
+            <div class="col-md-2 d-flex justify-content-end p-3">
+                {% user_info request.user %}
+            </div>
+        </div>
+    </div>
+
+
+    {% comment %}
+    <form method="post">
+        {% csrf_token %}
+        <button type="submit">Submit</button>
+    </form>
+    {% endcomment %}
+     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js" integrity="sha384-j1CDi7MgGQ12Z7Qab0qlWQ/Qqz24Gc6BM0thvEMVjHnfYGF0rmFCozFSxQBxwHKO" crossorigin="anonymous"></script>
+</body>
+    <script src='https://unpkg.com/akar-icons-fonts'></script>
+</html>

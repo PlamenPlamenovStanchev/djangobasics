@@ -1,0 +1,32 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <title>Title</title>
+</head>
+<body>
+    {% comment %}
+    <form method="post">
+        {% csrf_token %}
+        {{ form }}
+        <button>Submit</button>
+    </form>
+    {% endcomment %}
+    
+    
+    {% comment %} 
+    <form method="post">
+        {% csrf_token %}
+        <label>My text</label>
+        <input name="my_text" type="text"/>
+        <button type="submit">Submit</button>
+    </form>
+    {% endcomment %}
+    <h1>Welcome to our Forum. Hope of enjoying yourself!!!</h1>
+    <h2>Current time is: {{ current_time }}</h2>
+
+</body>
+</html>
